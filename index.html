@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Volunteering</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src='http://colorbrewer2.org/export/colorbrewer.js'></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stretch {
+    align-items: stretch;
+  }
+
+  input[type="color"] {
+    width: 100%;
+    height: 100%;
+  }
+
+  a {
+    color: purple;
+  }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Volunteering in the United States</h1>
+    <p>In 2017, over $400 billion dollars was donated to charities and organizations
+      in the United States <a href="https://www.usatoday.com/story/money/nation-now/2018/06/12/charity-charitable-giving-philanthropy-foudnations/693212002/">(Carrig 2018)</a>,
+      while around 77 million individuals donated nearly 7 billion hours towards volunteering,
+      accounting for $167 billion dollars worth of service
+      <a href="https://www.nationalservice.gov/serve/via/research">(National Service)</a>.</p>
+    <p>The data used in this project
+      <a href="https://data.nationalservice.gov/Volunteering-and-Civic-Engagement/Volunteering-in-America-State-Data/pvrw-bwct">Volunteering in America</a>
+      survey conducted by
+    </p>
+  </div>
+  <div class='container'>
+    <h2>Choropleth</h2>
+    <p>The VIA dataset looked at. The percentages reflect the fraction of volunteers who
+      have participated in the indicated volunteer activity or organization.
+    </p>
+    <div class='flex-container'>
+      <div style='flex-grow:1'>
+        <select id='selectGroupUV' class='selectGroup'>
+          <option class='acts'>Activity</option>
+          <option class='orgs'>Organization</option>
+        </select>
+      </div>
+      <div style='flex-basis:75%'>
+        <select id='selectTypeUV' class='selectType'>
+        </select>
+      </div>
+    </div>
+    <svg id='choroplethUV'></svg>
+  </div>
+
+  <div class='container'>
+    <h2>Radar Chart</h2>
+    <p>One limitation to using a (univariate) choropleth map is that one can only view a single
+    variable at any given moment, making it difficult to compare the frequency of volunteer
+    activities, or to examine the distribution of volunteer organizations that people participate
+    in. One non-spatial visualization method that can better aid such a comparison is a radar chart.
+    </p>
+    <p>For the radar chart below, you can select whether to plot the distribution of Volunteering
+      activities or organizations by selecting "Activity" or "Organization" respectively. To highlight
+      a particular state, just select it from the menu on the left. The two color options can be
+      used for changing the colors used on the graph. The first one corresponds to the states
+      that are not selected, while the second color option sets the color for the selected state.
+
+    </p>
+    <div class='flex-container stretch'>
+      <div style='flex-basis: 50%'>
+        <select id='selectGroupRC' class='selectGroup'>
+          <option class='acts'>Activity</option>
+          <option class='orgs'>Organization</option>
+        </select>
+      </div>
+      <div style='flex-basis: 25%'>
+        <input type="color" id='background' name="c1" value="#0073FF">
+      </div>
+      <div style='flex-basis: 25%'>
+        <input type="color" id='highlight' name="c2" value="#FF8C00">
+      </div>
+    </div>
+    <div style='margin: 10px'></div>
+    <div class='flex-container'>
+      <div>
+        <select id='selectStateRC' size=15>
+        </select>
+      </div>
+      <div class='radarChart' style='flex-basis: 75%'>
+        <svg id='radarChart'></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class='container'>
+    <h2>Bivariate Choropleth</h2>
+    <p>Testing</p>
+    <div class='flex-container'>
+      <div style='flex-basis: 10%'>
+        <select id='selectSchemeBV'>
+        </select>
+      </div>
+      <div style='flex-basis: 15%'>
+        <select id='selectDemographicBV'>
+        </select>
+      </div>
+      <div style='flex-basis: 15%'>
+        <select id='selectGroupBV' class='selectGroup'>
+          <option class='acts'>Activity</option>
+          <option class='orgs'>Organization</option>
+        </select>
+      </div>
+      <div style='flex-basis: 60%'>
+        <select id='selectTypeBV' class='selectType'>
+        </select>
+      </div>
+    </div>
+    <svg id='choroplethBV'></svg>
+  </div>
+
+  <div class='container'>
+    <h2>Scatterplot</h2>
+    <div class='flex-container'>
+      <div style='flex-basis: 12%'>
+        <select id='selectScaleSP'>
+          <option class='linear'>Linear</option>
+          <option class='log'>Log</option>
+        </select>
+      </div>
+      <div style='flex-basis: 19%'>
+        <select id='selectDemographicSP'>
+        </select>
+      </div>
+      <div style='flex-basis: 19%'>
+        <select id='selectGroupSP' class='selectGroup'>
+          <option class='acts'>Activity</option>
+          <option class='orgs'>Organization</option>
+        </select>
+      </div>
+      <div style='flex-basis: 50%'>
+        <select id='selectTypeSP' class='selectType'>
+        </select>
+      </div>
+    </div>
+    <svg id='scatPlot'></svg>
+  </div>
+
+
+  <footer>
+		<p>Copyright &copy; Brandon Bergerud 2019</p>
+  </footer>
+
+</body>
+</html>
+<script src='js/base.js'></script>
+<script src='js/schemes.js'></script>
+<script src='js/labels.js'></script>
+<script src='js/labels_init.js'></script>
+<script src='js/d3/univariate.js'></script>
+<script src='js/d3/radar.js'></script>
+<script src='js/d3/bivariate.js'></script>
+<script src='js/d3/scatterplot.js'></script>
+<script src='js/load_data.js'></script>
