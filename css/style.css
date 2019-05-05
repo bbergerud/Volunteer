@@ -22,11 +22,11 @@ footer {
 
 .tooltip {
     position: absolute;
-    text-align: left;
+    text-align: middle;
     width: auto;
     height: auto;
-    margin: 5%;
-    padding: 2px;
+    margin: 0.5% 1% 0.5% 1%;
+    padding: 0.5% 1% 0.5% 1%;
     font: 12px sans-serif;
     background: lightgreen;
     border: 0px;

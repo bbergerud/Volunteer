@@ -51,9 +51,16 @@ function initBivariate(){
             var temp = organization_labels;
           }
 
+          /*
           var html = '<h2>' + stateName + '</h2>' +
                      '<p> ' + demographic_labels[demo] + ': ' + d.demo[demo] + '</p>' +
-                     '<p> ' + temp[type] + ': ' + d[group][type] + '</p>';
+                     '<p> ' + temp[type] + ': ' + Math.round(100*d[group][type]) + '%</p>';
+          */
+
+          var html = '<h2>' + stateName + '</h2>' +
+                     '<p> ' + demographic_labels[demo] + ': ' + d.demo[demo] + '</p>' +
+                     '<p> ' + type[0].toUpperCase() + type.slice(1) + ': ' + Math.round(100*d[group][type]) + '%</p>';
+
 
           tooltip.style('opacity', .9)
             .html(html)
@@ -179,13 +186,15 @@ function addLegend(svg) {
     .text(getDemo('BV'))
     .attr('font-weight', 'bold')
     .attr('dy', '0.71em')
-    .attr('transform', `rotate(90) translate(${n/2 * k}, 6)`)
-    .attr('text-anchor', 'middle');
+    .attr('transform', `rotate(90) translate(${0}, 6)`)
+    //.attr('transform', `rotate(90) translate(${n/2 * k}, 6)`)
+    .attr('text-anchor', 'left');
 
   g.append('text')
     .text(getType('BV'))
     .attr('font-weight', 'bold')
     .attr('dy', '0.71em')
-    .attr('transform', `translate(${n/2*k}, ${n*k+6})`)
-    .attr('text-anchor', 'middle');
+    //.attr('transform', `translate(${n/2*k}, ${n*k+6})`)
+    .attr('transform', `translate(${0}, ${n*k+6})`)
+    .attr('text-anchor', 'right');
 }
