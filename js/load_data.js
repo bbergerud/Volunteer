@@ -8,10 +8,10 @@ var tooltip = d3.select("body")
     .style("opacity", 0);
 
 
-d3.json('/data/us_states.json').then(function(json){
-  d3.csv('/data/organizations.csv').then(function(orgs){
-    d3.csv('/data/activities.csv').then(function(acts){
-      d3.csv('/data/demographics.csv').then(function(demo){
+d3.json('data/us_states.json').then(function(json){
+  d3.csv('data/organizations.csv').then(function(orgs){
+    d3.csv('data/activities.csv').then(function(acts){
+      d3.csv('data/demographics.csv').then(function(demo){
 
       // Remove Puerto Rico
       json.features.pop();
