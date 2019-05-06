@@ -43,7 +43,8 @@ table {
   text-align: center;
 }
 thead tr {
-  background-color: lightgreen;
+  background-color: mediumseagreen;
+  color: white;
 }
 
 table .odd {
@@ -52,6 +53,26 @@ table .odd {
 
 table tr {
   line-height: 2em;
+}
+
+a {
+  text-decoration: none;
+  color: dodgerblue;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stretch {
+  align-items: stretch;
+}
+
+input[type="color"] {
+  width: 100%;
+  height: 100%;
 }
 
 /*
