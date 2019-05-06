@@ -2,7 +2,7 @@ function getYlabel() {
   var group = getGroup('SP');
   var type  = getType('SP');
 
-  return `Volunteer Rate (${type})`;
+  return `Volunteer % (${type})`;
 }
 
 function getXlabel() {
@@ -40,8 +40,8 @@ function initScatterplot() {
 
   var yScale = d3.scaleLinear()
     .domain([
-      d3.min(states.features, function(d){return +d[group][type];}),
-      d3.max(states.features, function(d){return +d[group][type];})
+      100 * d3.min(states.features, function(d){return +d[group][type];}),
+      100 * d3.max(states.features, function(d){return +d[group][type];})
     ])
     .range([sHeight-margin.bottom, margin.top]);
 
@@ -56,7 +56,7 @@ function initScatterplot() {
     .enter()
     .append('circle')
       .attr('cx', function(d){return xScale(+d.demo[demo]);})
-      .attr('cy', function(d){return yScale(+d[group][type]);})
+      .attr('cy', function(d){return yScale(100 * +d[group][type]);})
       .attr('r', 10)
       .attr('opacity', 0.5)
       .attr('fill', 'purple')
@@ -143,8 +143,8 @@ function updateScatterplot(){
 
   var yScale = d3.scaleLinear()
     .domain([
-      d3.min(states.features, function(d){return +d[group][type];}),
-      d3.max(states.features, function(d){return +d[group][type];})
+      100 * d3.min(states.features, function(d){return +d[group][type];}),
+      100 * d3.max(states.features, function(d){return +d[group][type];})
     ])
     .range([sHeight-margin.bottom, margin.top]);
 
@@ -158,7 +158,7 @@ function updateScatterplot(){
     .transition()
     .duration(1000)
     .attr('cx', function(d){return xScale(+d.demo[demo]);})
-    .attr('cy', function(d){return yScale(+d[group][type]);})
+    .attr('cy', function(d){return yScale(100 * +d[group][type]);})
     .attr('fill', 'purple');
 
   svg.select('.x.axis')

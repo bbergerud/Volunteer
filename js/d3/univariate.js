@@ -73,8 +73,8 @@ function initUnivariate() {
         .text(function(d,i) {
             var extent = colorScale.invertExtent(d);
             //extent will be a two-element array, format it however you want:
-            var format = d3.format("0.3f");
-            return format(+extent[0]);
+            var format = d3.format(".1f");
+            return format(100 * +extent[0]) + '%';
         });
 
   d3.selectAll('#selectTypeUV, #selectGroupUV')
@@ -113,8 +113,8 @@ function updateUnivariate() {
       .text(function(d,i) {
           var extent = colorScale.invertExtent(d);
           //extent will be a two-element array, format it however you want:
-          var format = d3.format("0.3f");
-          return format(+extent[0]);
+          var format = d3.format("0.1f");
+          return format(100 * +extent[0]) + '%';
           return format(+extent[0]) + " - " + format(+extent[1]);
       });
 
