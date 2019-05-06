@@ -113,24 +113,10 @@ function updateBivariate() {
       );});
 
     addLegend(svg);
-    //updateLegend();
 
   }
 
 
-function updateLegend() {
-  var g = d3.select('#bivariateLegend')
-  var colors = getScheme('BV');
-
-  console.log(colors);
-
-  g.selectAll('rect')
-    .data(d3.cross(d3.range(n), d3.range(n)))
-    .enter()
-    .attr('fill', function(d){
-      return colors[d[0] + 3*d[1]];
-    });
-}
 
 
 function addLegend(svg) {

@@ -1,3 +1,6 @@
+const colorNumber = 7;
+const wleg = w / colorNumber;
+
 function initUnivariate() {
 
   // Determine what volunteer type is selected
@@ -10,7 +13,7 @@ function initUnivariate() {
           d3.min(states.features, function(d){return d[group][type];}),
           d3.max(states.features, function(d){return d[group][type];})
       ])
-      .range(d3.schemeBlues[7]);
+      .range(d3.schemeBlues[colorNumber]);
 
   // Create the map
   var path = d3.geoPath().projection(projection.fitSize([w, h], states));
@@ -43,9 +46,39 @@ function initUnivariate() {
         tooltip.style('opacity', 0);
     });
 
+
+    var legend = svg.selectAll('g.legendUV')
+      .data(colorScale.range())
+      .enter()
+      .append('g')
+      .attr('class', 'legendUV');
+
+    legend.append('rect')
+        .attr("x", function(d,i) {
+          return i * wleg
+        })
+        .attr("y", 0)
+        .attr("width", wleg)
+        .attr("height", 10)
+        .style("stroke", "black")
+        .style("stroke-width", 1)
+        .style("fill", function(d){return d;});
+
+    legend.append('text')
+        .attr("x", function(d,i){
+          return i*wleg
+        }) //leave 5 pixel space after the <rect>
+        .attr("y", 15)
+        .attr("dy", "0.8em") //place text one line *below* the x,y point
+        .text(function(d,i) {
+            var extent = colorScale.invertExtent(d);
+            //extent will be a two-element array, format it however you want:
+            var format = d3.format("0.3f");
+            return format(+extent[0]);
+        });
+
   d3.selectAll('#selectTypeUV, #selectGroupUV')
     .on('change', function(){
-        console.log('here');
         updateUnivariate();
     });
 }
@@ -63,7 +96,7 @@ function updateUnivariate() {
             d3.min(states.features, function(d){return d[group][type];}),
             d3.max(states.features, function(d){return d[group][type];})
         ])
-        .range(d3.schemeBlues[7]);
+        .range(d3.schemeBlues[colorNumber]);
 
     var svg = d3.select('#choroplethUV');
 
@@ -71,4 +104,18 @@ function updateUnivariate() {
     svg.selectAll('path')
       .data(states.features)
       .attr('fill', function(d){return colorScale(+d[group][type]);});
+
+
+    var legend = svg.selectAll('g.legendUV')
+      .data(colorScale.range());
+
+    legend.selectAll('text')
+      .text(function(d,i) {
+          var extent = colorScale.invertExtent(d);
+          //extent will be a two-element array, format it however you want:
+          var format = d3.format("0.3f");
+          return format(+extent[0]);
+          return format(+extent[0]) + " - " + format(+extent[1]);
+      });
+
 }
