@@ -32,20 +32,90 @@
 <body>
   <div>
     <h1>Volunteering in the United States</h1>
+    <p><em>Presentation slides can be found
+      <a target='_blank' href='files/Presentation.pdf'>here</a>.</em>
+    </p>
+
     <p>In 2017, over $400 billion dollars was donated to charities and organizations
-      in the United States <a href="https://www.usatoday.com/story/money/nation-now/2018/06/12/charity-charitable-giving-philanthropy-foudnations/693212002/">(Carrig 2018)</a>,
-      while around 77 million individuals donated nearly 7 billion hours towards volunteering,
-      accounting for $167 billion dollars worth of service
-      <a href="https://www.nationalservice.gov/serve/via/research">(National Service)</a>.</p>
-    <p>The data used in this project
-      <a href="https://data.nationalservice.gov/Volunteering-and-Civic-Engagement/Volunteering-in-America-State-Data/pvrw-bwct">Volunteering in America</a>
-      survey conducted by
+      in the United States, with 70% coming from individual donors. Religious organizations
+      are the greatest benefactors with donations totaling $127 billion, followed by
+      educational ($59 billion) and human services ($50 billion). While donations have
+      reached record highs, the percentage of people donating has been declining
+      over the years, dropping from 66% in 2000 to 55% in 2014. This trend has resulted
+      in nonprofit organizations turning towards wealthier donors
+      <a target='_blank' href="https://www.usatoday.com/story/money/nation-now/2018/06/12/charity-charitable-giving-philanthropy-foudnations/693212002/">(Carrig 2018)</a>.
+    </p>
+    <p>
+      Besides donating, volunteers play a large part in supporting the services
+      of nonprofits. In 2016, around 77 million individuals (about 30% of the US adult
+      population) contributed nearly 7 billion hours towards volunteer work, accounting for an
+      estimated $167 billion worth of service. The demographic distribution of who volunteered
+      in 2017 is given in the table below <a target='_blank' href="https://www.nationalservice.gov/serve/via/">(Volunteering in America)</a>:
+    </p>
+
+      <table class='demotab'>
+        <thead>
+          <tr>
+            <th>Demographic</th>
+            <th>Volunteer Rate (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class='odd'>
+            <td>Men</td>
+            <td>26.5</td>
+          </tr>
+          <tr class='even'>
+            <td>Women</td>
+            <td>33.8</td>
+          </th>
+          <tr class='odd'>
+            <td>Generation Y</td>
+            <td>26.1</td>
+          </tr>
+          <tr class='even'>
+            <td>Millennials</td>
+            <td>28.2</td>
+          </tr>
+          <tr class='odd'>
+            <td>Generation X</td>
+            <td>36.4</td>
+          </tr>
+          <tr class='even'>
+            <td>Baby Boomers</td>
+            <td>30.7</td>
+          </tr>
+          <tr class='odd'>
+            <td>Silent Generation</td>
+            <td>24.8</td>
+          </tr>
+        </tbody>
+      </table>
+
+    <p>In this project, we'll look at the spatial and demographic aspects of Volunteering in the
+      United States at the state level, using data collected from the
+      <a href="https://data.nationalservice.gov/Volunteering-and-Civic-Engagement/Volunteering-in-America-State-Data/pvrw-bwct">Volunteering and Civic Life in America</a>
+      2017 survey. This survey was conducted by the U.S. Census Bureau and the Bureau of Labor
+      Statistics and published by the Corporation for National and Community Service. About 60,000
+      households (100,000 individuals) were surveyed, with respondents asked to indicate the
+      type of volunteer activities they participate in as well as the type of volunteer organizations.
+    </p>
+    <p>
+      A couple factors to keep in mind is the presence of sampling and response bias,
+      as well as rounding to the nearest percent in the downloaded CSV file.
     </p>
   </div>
   <div class='container'>
     <h2>Choropleth</h2>
-    <p>The VIA dataset looked at. The percentages reflect the fraction of volunteers who
-      have participated in the indicated volunteer activity or organization.
+    <p>Perhaps the simplest way to represent the spatial distribution of the rates of
+      volunteer activities and organizations across the US is a choropleth map. For the
+      choropleth map below, select whether you want to look at the volunteer activities
+      or organizations, then select from the list of options available in the second dropdown
+      menu to generate a choropleth map.
+    </p>
+    <p>
+      If you hover over a state, the percentage of volunteers who indicated that they
+      participated will be displayed.
     </p>
     <div class='flex-container'>
       <div style='flex-grow:1'>
@@ -65,16 +135,15 @@
   <div class='container'>
     <h2>Radar Chart</h2>
     <p>One limitation to using a (univariate) choropleth map is that one can only view a single
-    variable at any given moment, making it difficult to compare the frequency of volunteer
-    activities, or to examine the distribution of volunteer organizations that people participate
-    in. One non-spatial visualization method that can better aid such a comparison is a radar chart.
+    variable at any given moment, making it difficult to directly compare volunteer rates
+    across several different activities or organizations. One non-spatial visualization
+    method that can better aid such a comparison is a radar chart.
     </p>
     <p>For the radar chart below, you can select whether to plot the distribution of Volunteering
-      activities or organizations by selecting "Activity" or "Organization" respectively. To highlight
-      a particular state, just select it from the menu on the left. The two color options can be
-      used for changing the colors used on the graph. The first one corresponds to the states
+      activities or organizations by selecting "Activity" or "Organization" from the dropdown menu respectively.
+      The two color palettes can be used for changing the colors used on the graph. The first one corresponds to the states
       that are not selected, while the second color option sets the color for the selected state.
-
+      To highlight a particular state, just select it from the list of states to the left of the chart.
     </p>
     <div class='flex-container stretch'>
       <div style='flex-basis: 50%'>
@@ -104,7 +173,18 @@
 
   <div class='container'>
     <h2>Bivariate Choropleth</h2>
-    <p>Testing</p>
+    <p>As seen in the introduction, the volunteer rate has a demographic dependence,
+    where the oldest and youngest tend to volunteer the least and women more than
+    men. One way to visualize the demographic dependence of volunteering is through
+    the use of a bivariate choropleth map.
+    </p>
+    <p>In the bivariate choropleth map below, the states are split by quantile
+      for both the demographic variable and the volunteer variable and assigned
+      a color based on its quantile rank for each variable. These colors are then
+      blended together, as illustrated in the legend below.
+    </p>
+    <p>For this plot, the demographic data was largely pulled from Wikipedia.</p>
+    </p>
     <div class='flex-container'>
       <div style='flex-basis: 10%'>
         <select id='selectSchemeBV'>
@@ -129,7 +209,16 @@
   </div>
 
   <div class='container'>
-    <h2>Scatterplot</h2>
+    <h2>Scatter Plot</h2>
+    <p>For this last visualization, a simple scatter plot is made based on the data used
+      for making the bivariate choropleth map. A log/linear option was added for the couple
+      cases where an extreme value exists in the demographic data, such as the very large
+      population of California or the population density of Washington D.C. If you hover
+      over a data point, the state will be displayed.
+    </p>
+    <p>The volunteer rates have been rounded to the nearest percent in the downloaded file,
+      which is why the scatter plot will often have a grid pattern to it.
+    </p>
     <div class='flex-container'>
       <div style='flex-basis: 12%'>
         <select id='selectScaleSP'>

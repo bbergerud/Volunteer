@@ -3,6 +3,7 @@ body {
   font-size: 1.15em;
   margin: 10%;
   text-align: justify;
+  line-height: 1.35em;
 }
 
 select {
@@ -32,6 +33,25 @@ footer {
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
+}
+
+
+table {
+  width: 80%;
+  margin: 0% 10% 0% 10%;
+  background-color: none;
+  text-align: center;
+}
+thead tr {
+  background-color: lightgreen;
+}
+
+table .odd {
+  background-color: seashell;
+}
+
+table tr {
+  line-height: 2em;
 }
 
 /*
