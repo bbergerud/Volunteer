@@ -18,8 +18,8 @@ function initRadarChart(options) {
   }
 
   const size = $('.radarChart').width()
-  const dim = parseInt(0.7 * size);
-  const m = parseInt(0.15 * size);
+  const dim = parseInt(0.6 * size);
+  const m = parseInt(0.20 * size);
   var cfg = {
     w: dim,     //Width of the circle
     h: dim,     //Height of the circle
@@ -155,7 +155,7 @@ function initRadarChart(options) {
     //Append the labels at each axis
   axis.append("text")
     .attr("class", "radarLegend")
-    .style("font-size", "20px")
+    .style("font-size", "15px")
     .attr("text-anchor", "middle")
     .attr("dy", "0.35em")
     .attr("x", function(d, i){

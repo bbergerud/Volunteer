@@ -2,7 +2,7 @@ const w = $('.container').width();
 const h = parseInt(w * 0.75);
 const sWidth  = w;
 const sHeight = 0.7 * h;
-const margin = {'top': 60, 'bottom': 60, 'left': 60, 'right': 60};
+const margin = {'top': 75, 'bottom': 75, 'left': 75, 'right': 75};
 const n = 3;
 const k = 24;
 
